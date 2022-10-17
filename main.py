@@ -1,13 +1,17 @@
 import psycopg2
 
-from VK.VKinder import VKinder
 from DB.BD_VK import create_table, drop_table_all
+from VK.VKinder import VKinder
+
 
 def config_read():
     '''
-        Функция читает необходимые токены из файла для использования в коде. Предназначена для соблюдения мер
-    безопасности по использованию персональных данных. Результатом выполнения функции являются переменные,
-    в которых хранятся ключи доступа для использования VK_API: ключ доступа пользователя и ключ доступа сообщества.
+    Функция читает необходимые токены из файла для использования в коде.
+    Предназначена для соблюдения мер безопасности,
+    по использованию персональных данных.
+    Результатом выполнения функции являются переменные,
+    в которых хранятся ключи доступа для использования VK_API:
+    ключ доступа пользователя и ключ доступа сообщества.
     '''
     file_name = 'all_tokens.config'
     contents = open(file_name).read()
@@ -18,8 +22,13 @@ def config_read():
 
 
 if __name__ == '__main__':
-    with psycopg2.connect(database="bd_VKinder", user="postgres", password="VKinder_BD", host='185.246.67.169',
-                          port='33835') as conn:
+    with psycopg2.connect(
+        database="bd_VKinder",
+        user="postgres",
+        password="VKinder_BD",
+        host='185.246.67.169',
+        port='33835'
+                        ) as conn:
         drop_table_all(conn)
         create_table(conn)
 
